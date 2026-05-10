@@ -1,0 +1,112 @@
+# =============================================
+#   NextCredits - Shop Configuration
+#   File: shops/main.yml
+# =============================================
+
+# Display name shown in the GUI title (supports & color codes)
+display-name: "&6&lCredit Shop"
+
+# Number of rows (1-6). 3 = 27 slots, 4 = 36 slots, etc.
+rows: 4
+
+# Items available in this shop
+# slot: position in inventory (0 = top-left, count left to right)
+# With border fill, usable center slots for rows=4: 10-16, 19-25, 28-34
+items:
+
+  # --- Common Items ---
+  diamonds:
+    name: "&b&lDiamond"
+    material: DIAMOND
+    amount: 1
+    price: 100
+    slot: 10
+    lore:
+      - "&7A shiny diamond!"
+      - "&7Great for crafting."
+
+  emeralds:
+    name: "&a&lEmerald"
+    material: EMERALD
+    amount: 1
+    price: 50
+    slot: 11
+    lore:
+      - "&7Currency of villagers."
+
+  diamond_sword:
+    name: "&b&lDiamond Sword"
+    material: DIAMOND_SWORD
+    amount: 1
+    price: 500
+    slot: 12
+    lore:
+      - "&7A powerful weapon!"
+
+  golden_apple:
+    name: "&e&lGolden Apple"
+    material: GOLDEN_APPLE
+    amount: 1
+    price: 200
+    slot: 13
+    lore:
+      - "&7Restores health and gives buffs."
+
+  exp_bottle:
+    name: "&a&lBottle o' Enchanting"
+    material: EXPERIENCE_BOTTLE
+    amount: 8
+    price: 150
+    slot: 14
+    lore:
+      - "&78x experience bottles!"
+
+  nether_star:
+    name: "&f&lNether Star"
+    material: NETHER_STAR
+    amount: 1
+    price: 2000
+    slot: 15
+    lore:
+      - "&7Rare crafting material."
+      - "&cExtremely valuable!"
+
+  blaze_rod:
+    name: "&6&lBlaze Rod"
+    material: BLAZE_ROD
+    amount: 4
+    price: 80
+    slot: 19
+    lore:
+      - "&74x Blaze Rods."
+      - "&7Used for brewing."
+
+  ender_pearl:
+    name: "&5&lEnder Pearl"
+    material: ENDER_PEARL
+    amount: 4
+    price: 120
+    slot: 20
+    lore:
+      - "&74x Ender Pearls."
+      - "&7Teleportation made easy."
+
+  tnt:
+    name: "&c&lTNT"
+    material: TNT
+    amount: 4
+    price: 300
+    slot: 21
+    lore:
+      - "&74x TNT blocks."
+      - "&c&lHandle with care!"
+
+  elytra:
+    name: "&7&lElytra"
+    material: ELYTRA
+    amount: 1
+    price: 5000
+    slot: 22
+    lore:
+      - "&7Fly through the skies!"
+      - "&6Legendary item."

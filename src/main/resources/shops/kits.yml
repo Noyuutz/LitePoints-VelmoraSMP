@@ -1,0 +1,178 @@
+display-name: "&6&l⚔ Starter Kits"
+rows: 6
+
+items:
+
+  iron_kit:
+    name: "&7&lIron Kit"
+    material: IRON_CHESTPLATE
+    price: 200
+    slot: 11
+    type: bundle
+    purchase-limit: 3
+    lore:
+      - "&7A complete set of Iron Armor"
+      - "&7with standard enchants."
+      - ""
+      - "&aIncludes:"
+      - "&7- Iron Helmet"
+      - "&7- Iron Chestplate"
+      - "&7- Iron Leggings"
+      - "&7- Iron Boots"
+    bundle-items:
+      helmet:
+        material: IRON_HELMET
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+          WATER_WORKER: 1
+          OXYGEN: 3
+      chestplate:
+        material: IRON_CHESTPLATE
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+      leggings:
+        material: IRON_LEGGINGS
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+          SWIFT_SNEAK: 3
+      boots:
+        material: IRON_BOOTS
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+          PROTECTION_FALL: 4
+
+  diamond_kit:
+    name: "&b&lDiamond Kit"
+    material: DIAMOND_CHESTPLATE
+    price: 400
+    slot: 13
+    type: bundle
+    purchase-limit: 3
+    lore:
+      - "&7A complete set of Diamond Armor"
+      - "&7with standard enchants."
+      - ""
+      - "&aIncludes:"
+      - "&7- Diamond Helmet"
+      - "&7- Diamond Chestplate"
+      - "&7- Diamond Leggings"
+      - "&7- Diamond Boots"
+    bundle-items:
+      helmet:
+        material: DIAMOND_HELMET
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+          WATER_WORKER: 1
+          OXYGEN: 3
+      chestplate:
+        material: DIAMOND_CHESTPLATE
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+      leggings:
+        material: DIAMOND_LEGGINGS
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+          SWIFT_SNEAK: 3
+      boots:
+        material: DIAMOND_BOOTS
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+          PROTECTION_FALL: 4
+
+  netherite_kit:
+    name: "&8&lNetherite Kit"
+    material: NETHERITE_CHESTPLATE
+    price: 600
+    slot: 15
+    type: bundle
+    purchase-limit: 3
+    lore:
+      - "&7A complete set of Netherite Armor"
+      - "&7with standard enchants."
+      - ""
+      - "&aIncludes:"
+      - "&7- Netherite Helmet"
+      - "&7- Netherite Chestplate"
+      - "&7- Netherite Leggings"
+      - "&7- Netherite Boots"
+    bundle-items:
+      helmet:
+        material: NETHERITE_HELMET
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+          WATER_WORKER: 1
+          OXYGEN: 3
+      chestplate:
+        material: NETHERITE_CHESTPLATE
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+      leggings:
+        material: NETHERITE_LEGGINGS
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+          SWIFT_SNEAK: 3
+      boots:
+        material: NETHERITE_BOOTS
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 4
+          PROTECTION_EXPLOSIONS: 4
+          PROTECTION_FIRE: 4
+          PROTECTION_PROJECTILE: 4
+          DURABILITY: 3
+          MENDING: 1
+          PROTECTION_FALL: 4

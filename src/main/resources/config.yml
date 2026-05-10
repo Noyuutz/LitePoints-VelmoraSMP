@@ -1,0 +1,18 @@
+# =============================================
+#   NextCredits - Main Configuration
+# =============================================
+
+# Database: SQLite (data disimpan di plugins/NextCredits/credits.db)
+# Tidak perlu setup apapun!
+
+# Credits diberikan ke pemain baru saat pertama join (0 = disabled)
+starter-credits: 100
+
+# Messages (support & color codes)
+messages:
+  balance: "&aYour balance: &e{balance} credits"
+  not-enough-credits: "&cYou don't have enough credits! You need &e{price} &ccredits."
+  purchase-success: "&aPurchased &e{amount}x {item} &afor &e{price} credits&a! Remaining: &e{balance}"
+  inventory-full: "&cYour inventory is full!"
+  no-permission: "&cYou don't have permission!"
+  starter-credits: "&aWelcome! You received &e{amount} &astarter credits!"

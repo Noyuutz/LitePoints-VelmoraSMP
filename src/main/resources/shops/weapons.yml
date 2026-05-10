@@ -1,0 +1,83 @@
+# =============================================
+#   NextCredits - Shop Configuration
+#   File: shops/weapons.yml
+# =============================================
+
+display-name: "&c&lWeapon Shop"
+rows: 4
+
+items:
+
+  iron_sword:
+    name: "&7Iron Sword"
+    material: IRON_SWORD
+    amount: 1
+    price: 80
+    slot: 10
+    lore:
+      - "&7A reliable iron sword."
+
+  diamond_sword:
+    name: "&bDiamond Sword"
+    material: DIAMOND_SWORD
+    amount: 1
+    price: 500
+    slot: 11
+    lore:
+      - "&7Sharp and durable."
+
+  netherite_sword:
+    name: "&8Netherite Sword"
+    material: NETHERITE_SWORD
+    amount: 1
+    price: 2500
+    slot: 12
+    lore:
+      - "&7The ultimate sword."
+      - "&c&lTop tier weapon!"
+
+  bow:
+    name: "&6Bow"
+    material: BOW
+    amount: 1
+    price: 150
+    slot: 13
+    lore:
+      - "&7Classic ranged weapon."
+
+  crossbow:
+    name: "&eCrossbow"
+    material: CROSSBOW
+    amount: 1
+    price: 300
+    slot: 14
+    lore:
+      - "&7Powerful crossbow."
+
+  trident:
+    name: "&3Trident"
+    material: TRIDENT
+    amount: 1
+    price: 1500
+    slot: 15
+    lore:
+      - "&7Melee and ranged!"
+      - "&bWorks underwater too."
+
+  arrow_bundle:
+    name: "&fArrows x64"
+    material: ARROW
+    amount: 64
+    price: 60
+    slot: 19
+    lore:
+      - "&764 arrows."
+
+  tipped_arrow:
+    name: "&dPoison Arrow x16"
+    material: TIPPED_ARROW
+    amount: 16
+    price: 200
+    slot: 20
+    lore:
+      - "&716x poison tipped arrows."

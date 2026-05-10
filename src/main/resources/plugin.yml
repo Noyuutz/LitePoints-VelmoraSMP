@@ -1,0 +1,35 @@
+name: LitePoints
+version: 1.0.0
+main: id.nextcredits.NextCredits
+api-version: '1.21'
+description: Premium points & GUI shop system with MySQL and PlaceholderAPI support.
+authors: [Noyuutz]
+softdepend:
+  - PlaceholderAPI
+
+commands:
+  credits:
+    description: Manage player points
+    usage: /credits [balance|give|take|set|reload|panel] [player] [amount]
+    aliases: [credit, cr, points, lp]
+  creditshop:
+    description: Open the points shop menu
+    usage: /creditshop
+    aliases: [cshop, pointshop, lshop]
+
+permissions:
+  litepoints.use:
+    default: true
+  litepoints.shop:
+    default: true
+  litepoints.admin:
+    default: op
+  litepoints.editor:
+    default: op
+  litepoints.*:
+    default: op
+    children:
+      litepoints.use: true
+      litepoints.shop: true
+      litepoints.admin: true
+      litepoints.editor: true
