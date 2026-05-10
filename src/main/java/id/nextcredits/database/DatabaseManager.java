@@ -1,37 +1,34 @@
 package id.nextcredits.database;
 
 import id.nextcredits.NextCredits;
-import org.bukkit.configuration.file.FileConfiguration;
+import java.io.File;
 import java.sql.*;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 
 public class DatabaseManager {
     private final NextCredits plugin;
     private Connection connection;
-    private String host, database, username, password;
-    private int port;
 
     public DatabaseManager(NextCredits plugin) {
         this.plugin = plugin;
-        FileConfiguration cfg = plugin.getConfig();
-        host = cfg.getString("mysql.host", "localhost");
-        port = cfg.getInt("mysql.port", 3306);
-        database = cfg.getString("mysql.database", "nextcredits");
-        username = cfg.getString("mysql.username", "root");
-        password = cfg.getString("mysql.password", "password");
     }
 
     public boolean connect() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://" + host + ":" + port + "/" + database
-                    + "?useSSL=false&autoReconnect=true&characterEncoding=utf8";
-            connection = DriverManager.getConnection(url, username, password);
-            plugin.getLogger().info("Connected to MySQL!");
+            Class.forName("org.sqlite.JDBC");
+            File dataFolder = plugin.getDataFolder();
+            if (!dataFolder.exists()) dataFolder.mkdirs();
+            String url = "jdbc:sqlite:" + dataFolder.getAbsolutePath() + File.separator + "credits.db";
+            connection = DriverManager.getConnection(url);
+            try (Statement stmt = connection.createStatement()) {
+                stmt.execute("PRAGMA journal_mode=WAL;");
+            }
+            plugin.getLogger().info("Connected to SQLite database!");
             return true;
         } catch (Exception e) {
-            plugin.getLogger().log(Level.SEVERE, "Could not connect to MySQL: " + e.getMessage());
+            plugin.getLogger().log(Level.SEVERE, "Could not connect to SQLite: " + e.getMessage());
             return false;
         }
     }
@@ -43,36 +40,31 @@ public class DatabaseManager {
 
     public void createTables() {
         try (Statement stmt = connection.createStatement()) {
-            // Credits table
             stmt.executeUpdate("CREATE TABLE IF NOT EXISTS nc_credits (" +
-                "uuid VARCHAR(36) NOT NULL PRIMARY KEY, " +
-                "player_name VARCHAR(16) NOT NULL, " +
-                "credits BIGINT NOT NULL DEFAULT 0, " +
-                "last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);");
+                "uuid TEXT NOT NULL PRIMARY KEY, " +
+                "player_name TEXT NOT NULL, " +
+                "credits INTEGER NOT NULL DEFAULT 0, " +
+                "last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
 
-            // Transactions table
             stmt.executeUpdate("CREATE TABLE IF NOT EXISTS nc_transactions (" +
-                "id INT AUTO_INCREMENT PRIMARY KEY, " +
-                "uuid VARCHAR(36) NOT NULL, " +
-                "type ENUM('ADD','REMOVE','SET','PURCHASE') NOT NULL, " +
-                "amount BIGINT NOT NULL, " +
-                "reason VARCHAR(255), " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "uuid TEXT NOT NULL, " +
+                "type TEXT NOT NULL, " +
+                "amount INTEGER NOT NULL, " +
+                "reason TEXT, " +
                 "timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
 
-            // Purchase limits table
             stmt.executeUpdate("CREATE TABLE IF NOT EXISTS nc_purchase_limits (" +
-                "uuid VARCHAR(36) NOT NULL, " +
-                "shop_id VARCHAR(64) NOT NULL, " +
-                "product_id VARCHAR(64) NOT NULL, " +
-                "purchase_count INT NOT NULL DEFAULT 0, " +
+                "uuid TEXT NOT NULL, " +
+                "shop_id TEXT NOT NULL, " +
+                "product_id TEXT NOT NULL, " +
+                "purchase_count INTEGER NOT NULL DEFAULT 0, " +
                 "PRIMARY KEY (uuid, shop_id, product_id));");
 
         } catch (SQLException e) {
             plugin.getLogger().log(Level.SEVERE, "Error creating tables: " + e.getMessage());
         }
     }
-
-    // ── Credits ──
 
     public long getCredits(UUID uuid) {
         try (PreparedStatement ps = connection.prepareStatement(
@@ -87,18 +79,18 @@ public class DatabaseManager {
     public void setCredits(UUID uuid, String playerName, long amount) {
         try (PreparedStatement ps = connection.prepareStatement(
                 "INSERT INTO nc_credits (uuid, player_name, credits) VALUES (?, ?, ?) " +
-                "ON DUPLICATE KEY UPDATE player_name = ?, credits = ?")) {
+                "ON CONFLICT(uuid) DO UPDATE SET player_name = excluded.player_name, credits = excluded.credits")) {
             ps.setString(1, uuid.toString()); ps.setString(2, playerName); ps.setLong(3, amount);
-            ps.setString(4, playerName); ps.setLong(5, amount); ps.executeUpdate();
+            ps.executeUpdate();
         } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error: " + e.getMessage()); }
     }
 
     public void addCredits(UUID uuid, String playerName, long amount) {
         try (PreparedStatement ps = connection.prepareStatement(
                 "INSERT INTO nc_credits (uuid, player_name, credits) VALUES (?, ?, ?) " +
-                "ON DUPLICATE KEY UPDATE player_name = ?, credits = credits + ?")) {
+                "ON CONFLICT(uuid) DO UPDATE SET player_name = excluded.player_name, credits = credits + excluded.credits")) {
             ps.setString(1, uuid.toString()); ps.setString(2, playerName); ps.setLong(3, amount);
-            ps.setString(4, playerName); ps.setLong(5, amount); ps.executeUpdate();
+            ps.executeUpdate();
         } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error: " + e.getMessage()); }
     }
 
@@ -132,8 +124,6 @@ public class DatabaseManager {
         } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error: " + e.getMessage()); }
     }
 
-    // ── Purchase Limits ──
-
     public int getPurchaseCount(UUID uuid, String shopId, String productId) {
         try (PreparedStatement ps = connection.prepareStatement(
                 "SELECT purchase_count FROM nc_purchase_limits WHERE uuid = ? AND shop_id = ? AND product_id = ?")) {
@@ -147,7 +137,7 @@ public class DatabaseManager {
     public void incrementPurchaseCount(UUID uuid, String shopId, String productId) {
         try (PreparedStatement ps = connection.prepareStatement(
                 "INSERT INTO nc_purchase_limits (uuid, shop_id, product_id, purchase_count) VALUES (?, ?, ?, 1) " +
-                "ON DUPLICATE KEY UPDATE purchase_count = purchase_count + 1")) {
+                "ON CONFLICT(uuid, shop_id, product_id) DO UPDATE SET purchase_count = purchase_count + 1")) {
             ps.setString(1, uuid.toString()); ps.setString(2, shopId); ps.setString(3, productId);
             ps.executeUpdate();
         } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error: " + e.getMessage()); }
@@ -157,12 +147,11 @@ public class DatabaseManager {
         return getPurchaseCount(uuid, shopId, productId) >= maxLimit;
     }
 
-    // Lock all lower ranks when higher rank is purchased
-    public void lockLowerRanks(UUID uuid, String shopId, java.util.List<String> lowerRankIds) {
+    public void lockLowerRanks(UUID uuid, String shopId, List<String> lowerRankIds) {
         for (String rankId : lowerRankIds) {
             try (PreparedStatement ps = connection.prepareStatement(
                     "INSERT INTO nc_purchase_limits (uuid, shop_id, product_id, purchase_count) VALUES (?, ?, ?, 999) " +
-                    "ON DUPLICATE KEY UPDATE purchase_count = 999")) {
+                    "ON CONFLICT(uuid, shop_id, product_id) DO UPDATE SET purchase_count = 999")) {
                 ps.setString(1, uuid.toString()); ps.setString(2, shopId); ps.setString(3, rankId);
                 ps.executeUpdate();
             } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error locking rank: " + e.getMessage()); }
