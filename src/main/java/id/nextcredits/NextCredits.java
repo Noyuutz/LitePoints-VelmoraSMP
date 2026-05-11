@@ -13,6 +13,7 @@ public class NextCredits extends JavaPlugin {
     private DatabaseManager databaseManager;
     private CreditsManager creditsManager;
     private ShopManager shopManager;
+    private RankManager rankManager;
     private ShopEditorManager shopEditorManager;
     private ShopEditorListener shopEditorListener;
 
@@ -23,7 +24,7 @@ public class NextCredits extends JavaPlugin {
 
         databaseManager = new DatabaseManager(this);
         if (!databaseManager.connect()) {
-            getLogger().severe("Failed to connect to MySQL! Disabling plugin.");
+            getLogger().severe("Failed to connect to SQLite! Disabling plugin.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -31,20 +32,16 @@ public class NextCredits extends JavaPlugin {
 
         creditsManager = new CreditsManager(this);
         shopManager = new ShopManager(this);
+        rankManager = new RankManager(this);
         shopEditorManager = new ShopEditorManager(this);
         shopEditorListener = new ShopEditorListener(this);
 
-        // Commands
         CreditsCommand creditsCmd = new CreditsCommand(this);
         ShopCommand shopCmd = new ShopCommand(this);
         getCommand("credits").setExecutor(creditsCmd);
         getCommand("credits").setTabCompleter(creditsCmd);
         getCommand("creditshop").setExecutor(shopCmd);
-        getCommand("shop").setExecutor(shopCmd);
-        getCommand("shop").setTabCompleter(shopCmd);
-        getCommand("shops").setExecutor(shopCmd);
 
-        // Listeners
         getServer().getPluginManager().registerEvents(new MainMenuListener(this), this);
         getServer().getPluginManager().registerEvents(new ShopGUIListener(this), this);
         getServer().getPluginManager().registerEvents(new ShopSelectorListener(this), this);
@@ -69,6 +66,7 @@ public class NextCredits extends JavaPlugin {
     public DatabaseManager getDatabaseManager() { return databaseManager; }
     public CreditsManager getCreditsManager() { return creditsManager; }
     public ShopManager getShopManager() { return shopManager; }
+    public RankManager getRankManager() { return rankManager; }
     public ShopEditorManager getShopEditorManager() { return shopEditorManager; }
     public ShopEditorListener getShopEditorListener() { return shopEditorListener; }
 }
