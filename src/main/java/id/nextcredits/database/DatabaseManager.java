@@ -17,11 +17,11 @@ public class DatabaseManager {
 
     public boolean connect() {
         try {
-            Class.forName("org.sqlite.JDBC");
             File dataFolder = plugin.getDataFolder();
             if (!dataFolder.exists()) dataFolder.mkdirs();
-            String url = "jdbc:sqlite:" + dataFolder.getAbsolutePath() + File.separator + "credits.db";
-            connection = DriverManager.getConnection(url);
+            File dbFile = new File(dataFolder, "litepoints.db");
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
             try (Statement stmt = connection.createStatement()) {
                 stmt.execute("PRAGMA journal_mode=WAL;");
             }
@@ -79,18 +79,18 @@ public class DatabaseManager {
     public void setCredits(UUID uuid, String playerName, long amount) {
         try (PreparedStatement ps = connection.prepareStatement(
                 "INSERT INTO nc_credits (uuid, player_name, credits) VALUES (?, ?, ?) " +
-                "ON CONFLICT(uuid) DO UPDATE SET player_name = excluded.player_name, credits = excluded.credits")) {
+                "ON CONFLICT(uuid) DO UPDATE SET player_name = ?, credits = ?")) {
             ps.setString(1, uuid.toString()); ps.setString(2, playerName); ps.setLong(3, amount);
-            ps.executeUpdate();
+            ps.setString(4, playerName); ps.setLong(5, amount); ps.executeUpdate();
         } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error: " + e.getMessage()); }
     }
 
     public void addCredits(UUID uuid, String playerName, long amount) {
         try (PreparedStatement ps = connection.prepareStatement(
                 "INSERT INTO nc_credits (uuid, player_name, credits) VALUES (?, ?, ?) " +
-                "ON CONFLICT(uuid) DO UPDATE SET player_name = excluded.player_name, credits = credits + excluded.credits")) {
+                "ON CONFLICT(uuid) DO UPDATE SET player_name = ?, credits = credits + ?")) {
             ps.setString(1, uuid.toString()); ps.setString(2, playerName); ps.setLong(3, amount);
-            ps.executeUpdate();
+            ps.setString(4, playerName); ps.setLong(5, amount); ps.executeUpdate();
         } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error: " + e.getMessage()); }
     }
 
@@ -154,7 +154,7 @@ public class DatabaseManager {
                     "ON CONFLICT(uuid, shop_id, product_id) DO UPDATE SET purchase_count = 999")) {
                 ps.setString(1, uuid.toString()); ps.setString(2, shopId); ps.setString(3, rankId);
                 ps.executeUpdate();
-            } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error locking rank: " + e.getMessage()); }
+            } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error: " + e.getMessage()); }
         }
     }
 
