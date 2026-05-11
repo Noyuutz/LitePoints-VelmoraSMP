@@ -1,128 +1,127 @@
-display-name: "&b&l⭐ Rank Shop"
+display-name: '&b&l⭐ Rank Shop'
 rows: 6
 
 items:
-
-  adventurer:
-    name: "&a&lAdventurer"
-    material: LEATHER_CHESTPLATE
+  vip:
+    name: '&3&lAdventurer'
+    material: IRON_SWORD
+    amount: 1
     price: 500
-    slot: 10
+    slot: 11
     type: command
     purchase-limit: 1
     rank-tier: 1
     commands:
-      - "lp user {player} parent set adventurer"
+    - lp user {player} parent set adventurer
     lore:
-      - "&7Entry level rank."
-      - ""
-      - "&aPerks:"
-      - "&7- Green prefix"
-      - "&7- Basic commands"
-      - ""
-      - "&eDuration: &fPermanent"
+    - '&7Get the Adventurer rank!'
+    - '&aPerks:'
+    - '&7- Sethome limit 2'
+    - '&7- /hat'
+    - '&7- Adventurer kit'
+    - ''
+    - '&eDuration: &fPermanent'
 
-  vip:
-    name: "&e&lVIP"
-    material: GOLD_CHESTPLATE
+  mvp:
+    name: '&e&lVIP'
+    material: DIAMOND
+    amount: 1
     price: 1000
-    slot: 11
+    slot: 13
     type: command
     purchase-limit: 1
     rank-tier: 2
     commands:
-      - "lp user {player} parent set vip"
+    - lp user {player} parent set vip
     lore:
-      - "&7VIP rank with extra perks."
-      - ""
-      - "&aPerks:"
-      - "&7- Yellow prefix"
-      - "&7- /fly access"
-      - "&7- VIP kit"
-      - ""
-      - "&eDuration: &fPermanent"
+    - '&aPerks:'
+    - '&7- Sethome Limit 5'
+    - '&7- /recipe'
+    - '&7- VIP kit'
+    - ''
+    - '&eDuration: &fPermanent'
 
-  mvp:
-    name: "&b&lMVP"
-    material: IRON_CHESTPLATE
+  elite:
+    name: '&4&lMVP'
+    material: EMERALD
+    amount: 1
     price: 2000
-    slot: 12
+    slot: 15
     type: command
     purchase-limit: 1
     rank-tier: 3
     commands:
-      - "lp user {player} parent set mvp"
+    - lp user {player} parent set mvp
     lore:
-      - "&7MVP rank with premium perks."
-      - ""
-      - "&aPerks:"
-      - "&7- Aqua prefix"
-      - "&7- /fly & /speed"
-      - "&7- MVP kit"
-      - "&7- All VIP perks"
-      - ""
-      - "&eDuration: &fPermanent"
+    - '&7Get the MVP rank!'
+    - '&aPerks:'
+    - '&7- Sethome Limit 8'
+    - '&7- /grindstone'
+    - '&7- /near'
+    - '&7- MVP kit'
+    - ''
+    - '&eDuration: &fPermanent'
 
   emperor:
-    name: "&6&lEmperor"
-    material: DIAMOND_CHESTPLATE
+    name: '&9&lEmperor'
+    material: END_CRYSTAL
+    amount: 1
     price: 3500
-    slot: 13
+    slot: 29
     type: command
     purchase-limit: 1
     rank-tier: 4
     commands:
-      - "lp user {player} parent set emperor"
+    - lp user {player} parent set emperor
     lore:
-      - "&7Emperor rank."
-      - ""
-      - "&aPerks:"
-      - "&7- Gold prefix"
-      - "&7- All MVP perks"
-      - "&7- Emperor kit"
-      - "&7- Custom join message"
-      - ""
-      - "&eDuration: &fPermanent"
+    - '&7Get the Emperor rank!'
+    - '&aPerks:'
+    - '&7- Sethome Limit 10'
+    - '&7- /anvil'
+    - '&7- /feed'
+    - '&7- Emperor kit'
+    - ''
+    - '&eDuration: &fPermanent'
 
   mystic:
-    name: "&d&lMystic"
-    material: AMETHYST_SHARD
+    name: '&b&lMystic'
+    material: NETHER_STAR
+    amount: 1
     price: 5500
-    slot: 14
+    slot: 31
     type: command
     purchase-limit: 1
     rank-tier: 5
     commands:
-      - "lp user {player} parent set mystic"
+    - lp user {player} parent set mystic
     lore:
-      - "&7Mystic rank - near the top."
-      - ""
-      - "&aPerks:"
-      - "&7- Purple prefix"
-      - "&7- All Emperor perks"
-      - "&7- Mystic kit"
-      - "&7- Particle effects"
-      - ""
-      - "&eDuration: &fPermanent"
+    - '&7Get the Mystic rank!'
+    - '&aPerks:'
+    - '&7- Sethome Limit 13'
+    - '&7- /repair'
+    - '&7- /heal'
+    - '&7- /nick'
+    - '&7- Mystic kit'
+    - ''
+    - '&eDuration: &fPermanent'
 
   sentinel:
-    name: "&c&lSentinel"
-    material: NETHERITE_CHESTPLATE
+    name: "§x§4§4§1§A§7§F§lS§x§5§0§1§E§8§E§le§x§5§D§2§3§9§E§ln§x§6§9§2§7§A§D§lt§x§7§5§2§B§B§C§li§x§7§5§2§B§B§C§ln§x§7§5§2§B§B§C§le§x§7§5§2§B§B§C§ll§7"
+    material: ENDER_EYE
+    amount: 1
     price: 10200
-    slot: 15
+    slot: 33
     type: command
     purchase-limit: 1
     rank-tier: 6
     commands:
-      - "lp user {player} parent set sentinel"
+    - lp user {player} parent set sentinel
     lore:
-      - "&cThe highest rank available!"
-      - ""
-      - "&aPerks:"
-      - "&7- Red prefix"
-      - "&7- All Mystic perks"
-      - "&7- Sentinel kit"
-      - "&7- Custom join/leave message"
-      - "&7- All server privileges"
-      - ""
-      - "&eDuration: &fPermanent"
+    - '&7Get the Sentinel rank!'
+    - '&aPerks:'
+    - '&7- Sethome Limit 15'
+    - '&7- Gradient Rank Prefix'
+    - '&7- /itemname'
+    - '&7- Sentinel kit'
+    - ''
+    - '&eDuration: &fPermanent'
