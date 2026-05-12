@@ -4,15 +4,8 @@ import id.nextcredits.commands.CreditsCommand;
 import id.nextcredits.commands.ShopCommand;
 import id.nextcredits.database.DatabaseManager;
 import id.nextcredits.hooks.PlaceholderAPIHook;
-import id.nextcredits.listeners.MainMenuListener;
-import id.nextcredits.listeners.PlayerJoinListener;
-import id.nextcredits.listeners.ShopEditorListener;
-import id.nextcredits.listeners.ShopGUIListener;
-import id.nextcredits.listeners.ShopSelectorListener;
-import id.nextcredits.managers.CreditsManager;
-import id.nextcredits.managers.RankManager;
-import id.nextcredits.managers.ShopEditorManager;
-import id.nextcredits.managers.ShopManager;
+import id.nextcredits.listeners.*;
+import id.nextcredits.managers.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class NextCredits extends JavaPlugin {
@@ -31,7 +24,7 @@ public class NextCredits extends JavaPlugin {
 
         databaseManager = new DatabaseManager(this);
         if (!databaseManager.connect()) {
-            getLogger().severe("Failed to connect to SQLite! Disabling plugin.");
+            getLogger().severe("Failed to connect to MySQL! Disabling plugin.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }

@@ -100,6 +100,7 @@ public class ShopProduct {
     public int getPurchaseLimit() { return purchaseLimit; }
     public List<BundleItem> getBundleItems() { return bundleItems; }
     public int getRankTier() { return rankTier; }
+    public List<String> getLore() { return lore; }
 
     // ── Inner class for bundle items ──
     public static class BundleItem {

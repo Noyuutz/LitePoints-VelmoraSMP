@@ -2,10 +2,11 @@ name: LitePoints
 version: 1.0.0
 main: id.nextcredits.NextCredits
 api-version: '1.21'
-description: Premium points & GUI shop system with SQLite and PlaceholderAPI support.
+description: Premium points & GUI shop system with MySQL and PlaceholderAPI support.
 authors: [Noyuutz]
 softdepend:
   - PlaceholderAPI
+
 commands:
   credits:
     description: Manage player points
@@ -15,12 +16,7 @@ commands:
     description: Open the points shop menu
     usage: /creditshop
     aliases: [cshop, pointshop, lshop]
-  shop:
-    description: Open the shop selector
-    usage: /shop
-  shops:
-    description: Open the shop selector
-    usage: /shops
+
 permissions:
   litepoints.use:
     default: true

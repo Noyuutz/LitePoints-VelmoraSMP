@@ -66,6 +66,8 @@ public class DatabaseManager {
         }
     }
 
+    // ── Credits ──
+
     public long getCredits(UUID uuid) {
         try (PreparedStatement ps = connection.prepareStatement(
                 "SELECT credits FROM nc_credits WHERE uuid = ?")) {
@@ -124,6 +126,8 @@ public class DatabaseManager {
         } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error: " + e.getMessage()); }
     }
 
+    // ── Purchase Limits ──
+
     public int getPurchaseCount(UUID uuid, String shopId, String productId) {
         try (PreparedStatement ps = connection.prepareStatement(
                 "SELECT purchase_count FROM nc_purchase_limits WHERE uuid = ? AND shop_id = ? AND product_id = ?")) {
@@ -154,7 +158,7 @@ public class DatabaseManager {
                     "ON CONFLICT(uuid, shop_id, product_id) DO UPDATE SET purchase_count = 999")) {
                 ps.setString(1, uuid.toString()); ps.setString(2, shopId); ps.setString(3, rankId);
                 ps.executeUpdate();
-            } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error: " + e.getMessage()); }
+            } catch (SQLException e) { plugin.getLogger().log(Level.WARNING, "Error locking rank: " + e.getMessage()); }
         }
     }
 
