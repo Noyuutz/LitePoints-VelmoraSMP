@@ -16,6 +16,9 @@ commands:
     description: Open the points shop menu
     usage: /creditshop
     aliases: [cshop, pointshop, lshop]
+  ckitsbuy:
+    description: Buy ChaosKit - called by Skript
+    usage: /ckitsbuy <player>
 
 permissions:
   litepoints.use:
