@@ -1,5 +1,6 @@
 package id.nextcredits;
 
+import id.nextcredits.commands.ChaosKitsCommand;
 import id.nextcredits.commands.CreditsCommand;
 import id.nextcredits.commands.ShopCommand;
 import id.nextcredits.database.DatabaseManager;
@@ -24,7 +25,7 @@ public class NextCredits extends JavaPlugin {
 
         databaseManager = new DatabaseManager(this);
         if (!databaseManager.connect()) {
-            getLogger().severe("Failed to connect to MySQL! Disabling plugin.");
+            getLogger().severe("Failed to connect to SQLite! Disabling plugin.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -41,6 +42,7 @@ public class NextCredits extends JavaPlugin {
         getCommand("credits").setExecutor(creditsCmd);
         getCommand("credits").setTabCompleter(creditsCmd);
         getCommand("creditshop").setExecutor(shopCmd);
+        getCommand("ckitsbuy").setExecutor(new ChaosKitsCommand(this));
 
         getServer().getPluginManager().registerEvents(new MainMenuListener(this), this);
         getServer().getPluginManager().registerEvents(new ShopGUIListener(this), this);
